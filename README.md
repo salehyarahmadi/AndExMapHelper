@@ -63,6 +63,31 @@ Step 3. Add your google map api key to AndroidManifest.xml file
 
 ## Usage
 
+### XML
+    
+    <?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" />
+</RelativeLayout>
+
+### Java
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        supportMapFragment.getMapAsync(this);
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
