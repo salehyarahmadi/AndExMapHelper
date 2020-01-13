@@ -169,6 +169,12 @@ Step 3. Add your google map api key to AndroidManifest.xml file
     // filter with distance. only markers display whose distance to current Location be less than maxDistanceToCurrentLocation parameter
     AndExMapHelper.filter(context, maxDistanceToCurrentLocation);
 
+#### Refresh the map
+    AndExMapHelper.refreshMap(context);
+
+#### Clear the map
+    AndExMapHelper.clearMap();
+
 
     
 
