@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" />
+
+    <Button
+        android:id="@+id/btn_change_status_to_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="change selected marker status to success" />
+
+    <Button
+        android:id="@+id/btn_change_status_to_failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_above="@id/btn_change_status_to_success"
+        android:layout_alignParentLeft="true"
+        android:text="change selected marker status to failed" />
+
+    <Button
+        android:id="@+id/btn_remove_selected_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="remove selected marker" />
+
+    <Button
+        android:id="@+id/btn_draw_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_above="@id/btn_remove_selected_marker"
+        android:layout_alignParentRight="true"
+        android:text="draw circle around marker" />
+
+    <Button
+        android:id="@+id/btn_remove_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_above="@id/btn_draw_circle"
+        android:layout_alignParentRight="true"
+        android:text="remove circle around marker" />
+
+    <Button
+        android:id="@+id/btn_filter_by_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_above="@id/btn_change_status_to_failed"
+        android:layout_alignParentLeft="true"
+        android:text="show only success and failed marker" />
+
+    <Button
+        android:id="@+id/btn_filter_by_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_above="@id/btn_filter_by_status"
+        android:layout_alignParentLeft="true"
+        android:text="show only nearby marker" />
+
+    <Button
+        android:id="@+id/btn_refresh_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Buttons"
+        android:layout_above="@id/btn_remove_circle"
+        android:layout_alignParentRight="true"
+        android:text="refresh map" />
+
+</RelativeLayout>
