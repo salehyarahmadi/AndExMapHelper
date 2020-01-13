@@ -79,7 +79,8 @@ Step 3. Add your google map api key to AndroidManifest.xml file
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity" />
-</RelativeLayout>
+    
+    </RelativeLayout>
 
 ### Java
 
@@ -123,6 +124,50 @@ Step 3. Add your google map api key to AndroidManifest.xml file
             }
         });
     }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+        // show current location on map with arbitary title, snippet and icon
+        AndExMapHelper.showCurrentLocationOnMap(this,"Title", "Snippet", R.drawable.ic_current_location);
+    }
+
+
+
+#### Add Marker
+    AndExMapHelper.addMarker(context,location, title, snippet, status);
+
+#### Create a location object
+    AndExMapHelper.locationInstance(latitude,longitude);
+
+#### Get location of selected marker
+    AndExMapHelper.getSelectedLocation();
+
+#### Change Status
+    AndExMapHelper.changeStatus(context, location, newStatus);
+
+#### Remove marker
+    AndExMapHelper.removeMarker(context, location);
+
+#### Draw circle
+    AndExMapHelper.drawCircle(centerLocation, radius, strokeWidth, strokeColor, fillColor);
+    AndExMapHelper.drawCircle(centerLatLng, radius, strokeWidth, strokeColor, fillColor);
+
+#### Remove circle
+    AndExMapHelper.removeCircle(context, centerLocation);
+
+#### Draw Polygon
+    AndExMapHelper.drawPolygon(strokeWidth, strokeColor, fillColor, LatLng... latLngs);
+
+#### Filter
+    // filter with statues. only markers display whose its status be in statues
+    AndExMapHelper.filter(context, String... statuses); 
+
+    // filter with distance. only markers display whose distance to centerLocation be less than maxDistanceToCenterLocation parameter
+    AndExMapHelper.filter(context, centerLocation, maxDistanceToCenterLocation);
+
+    // filter with distance. only markers display whose distance to current Location be less than maxDistanceToCurrentLocation parameter
+    AndExMapHelper.filter(context, maxDistanceToCurrentLocation);
 
 
     
