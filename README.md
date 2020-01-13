@@ -53,35 +53,32 @@ Step 2. Add the dependency
           implementation 'com.google.android.gms:play-services-location:17.0.0'
 	}
  
+Step 3. Add your google map api key to AndroidManifest.xml file
+  
+    <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="YOUR-GOOGLE-MAP-API-KEY" />
+ 
+
 
 ## Usage
 
 
-    new AndExAlertDialog.Builder(context)
-        .setTitle(title)
-        .setMessage(message)
-        .setPositiveBtnText(positiveText)
-        .setNegativeBtnText(negativeText)
-        .setCancelableOnTouchOutside(boolean)
-        .setFont(Font.IRAN_SANS)
-        .setImage(image, imagePercent)
-        .setEditText(true, false, hintText, InputType.TEXT_MULTI_LINE)
-        .OnPositiveClicked(positiveClickListener)
-        .OnNegativeClicked(negativeClickListener)
-        .setTitleTextColor(color)
-        .setMessageTextColor(color)
-        .setButtonTextColor(color)
-        .build();
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        // initialize map
+        AndExMapHelper.Init(context, googleMap,locationListener, minTimeToUpdateLocation, minDistanceToUpdateLocation);
+        
+        // define statuses and related marker icons for markers
+        AndExMapHelper.setStatuses(new HashMap<String, Integer>(){{
+            put("status_1", R.drawable.marker1);
+            put("status_2", R.drawable.marker2);
+            put("status_3", R.drawable.marker3);
+        }});
+    }
 
 
-    - All of above featuers is optional
-    - When you set positive button text, you must set OnPositiveClicked
-    - When you set negative button text, you must set OnNegativeClicked
-    - for setting image, you have three options:
-        1- using image url  --> .setImage("http://image-url/image.jpg" , 20)
-        2 -using image file  --> .setImage(new File("image-path-on-device") , 20)
-        3- using image resource id in drawable  --> .setImage(R.drawable.image , 20)
-    - imagePercent is actually the width of the image in percent
+    
 
 
         
