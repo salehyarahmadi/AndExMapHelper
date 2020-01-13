@@ -30,7 +30,7 @@ The simplest way to use this library is to add the library as dependency to your
 
 ## Gradle
 
-Add it in your root build.gradle at the end of repositories:
+Step 1. Add it in your root build.gradle at the end of repositories:
 
 	allprojects {
 		repositories {
@@ -75,6 +75,28 @@ Step 3. Add your google map api key to AndroidManifest.xml file
             put("status_2", R.drawable.marker2);
             put("status_3", R.drawable.marker3);
         }});
+
+        // get current location and move camera to it
+        AndExMapHelper.animateCamera(AndExMapHelper.getCurrentLocation(),AndExMapHelper.DEFAULT_ZOOM);
+
+        // set info windows adapter
+        AndExMapHelper.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                LayoutInflater inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View rowView = inflater.inflate(R.layout.item_marker_location, null);
+                TextView tvTitle   = rowView.findViewById(R.id.tvMarkerTitle);
+                TextView tvSnippet = rowView.findViewById(R.id.tvMarkerSnippet);
+                tvTitle.setText(marker.getTitle());
+                tvSnippet.setText(marker.getSnippet());
+                return rowView;
+            }
+        });
     }
 
 
