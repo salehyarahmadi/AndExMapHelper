@@ -32,105 +32,124 @@ The simplest way to use this library is to add the library as dependency to your
 
 Step 1. Add it in your root build.gradle at the end of repositories:
 
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+```gradle
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
+```
 
 Step 2. Add the dependency
   
-    // builde.gradle(project level)
-    dependencies {    
-	      classpath 'com.google.gms:google-services:4.2.0'
-	}
+```gradle
+// builde.gradle(project level)
+dependencies {    
+	classpath 'com.google.gms:google-services:4.2.0'
+}
 
-	// builde.gradle(app level)
-    dependencies {    
-	      implementation 'com.github.salehyarahmadi:AndExAlertDialog:v1.0.1'
-          implementation 'com.google.android.gms:play-services-maps:17.0.0'
-          implementation 'com.google.android.gms:play-services-location:17.0.0'
-	}
+// builde.gradle(app level)
+dependencies {    
+    implementation 'com.github.salehyarahmadi:AndExAlertDialog:v1.0.1'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+}
+```
  
 Step 3. Add your google map api key to AndroidManifest.xml file
   
-    <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR-GOOGLE-MAP-API-KEY" />
+```xml
+<meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="YOUR-GOOGLE-MAP-API-KEY" />
+```
  
 
 
 ## Usage
 
-### XML
-    
-    <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+### Permissions
+```xml
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+```
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity" />
+### XML
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<fragment
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" />
     
-    </RelativeLayout>
+</RelativeLayout>
+```
 
 ### Java
-    
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        supportMapFragment.getMapAsync(this);
-    }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        // initialize map
-        AndExMapHelper.Init(context, googleMap,locationListener, minTimeToUpdateLocation, minDistanceToUpdateLocation);
+**Note that before using this library's methods, be sure to get location permissions from the user**
+
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+    supportMapFragment.getMapAsync(this);
+}
+
+@Override
+public void onMapReady(GoogleMap googleMap) {
+    // initialize map
+    AndExMapHelper.Init(context, googleMap,locationListener, minTimeToUpdateLocation, minDistanceToUpdateLocation);
         
-        // define statuses and related marker icons for markers
-        AndExMapHelper.setStatuses(new HashMap<String, Integer>(){{
-            put("status_1", R.drawable.marker1);
-            put("status_2", R.drawable.marker2);
-            put("status_3", R.drawable.marker3);
-        }});
+    // define statuses and related marker icons for markers
+    AndExMapHelper.setStatuses(new HashMap<String, Integer>(){{
+        put("status_1", R.drawable.marker1);
+        put("status_2", R.drawable.marker2);
+        put("status_3", R.drawable.marker3);
+    }});
 
-        // get current location and move camera to it
-        AndExMapHelper.animateCamera(AndExMapHelper.getCurrentLocation(),AndExMapHelper.DEFAULT_ZOOM);
+    // get current location and move camera to it
+    AndExMapHelper.animateCamera(AndExMapHelper.getCurrentLocation(),AndExMapHelper.DEFAULT_ZOOM);
 
-        // set info windows adapter
-        AndExMapHelper.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-            @Override
-            public View getInfoWindow(Marker marker) {
-                return null;
-            }
+    // set info windows adapter
+    AndExMapHelper.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
+        }
 
-            @Override
-            public View getInfoContents(Marker marker) {
-                LayoutInflater inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View rowView = inflater.inflate(R.layout.item_marker_location, null);
-                TextView tvTitle   = rowView.findViewById(R.id.tvMarkerTitle);
-                TextView tvSnippet = rowView.findViewById(R.id.tvMarkerSnippet);
-                tvTitle.setText(marker.getTitle());
-                tvSnippet.setText(marker.getSnippet());
-                return rowView;
-            }
-        });
-    }
+        @Override
+        public View getInfoContents(Marker marker) {
+            LayoutInflater inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View rowView = inflater.inflate(R.layout.item_marker_location, null);
+            TextView tvTitle   = rowView.findViewById(R.id.tvMarkerTitle);
+            TextView tvSnippet = rowView.findViewById(R.id.tvMarkerSnippet);
+            tvTitle.setText(marker.getTitle());
+            tvSnippet.setText(marker.getSnippet());
+            return rowView;
+        }
+    });
+}
 
 
-    @Override
-    public void onLocationChanged(Location location) {
-        // show current location on map with arbitary title, snippet and icon
-        AndExMapHelper.showCurrentLocationOnMap(this,"Title", "Snippet", R.drawable.ic_current_location);
-    }
+@Override
+public void onLocationChanged(Location location) {
+    // show current location on map with arbitary title, snippet and icon
+    AndExMapHelper.showCurrentLocationOnMap(this,"Title", "Snippet", R.drawable.ic_current_location);
+}
+```
+    
     
 
 
