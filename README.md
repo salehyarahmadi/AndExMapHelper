@@ -23,7 +23,7 @@ This library has many features such as:
 `this library is compatible to androidx`
 
 ## Preview
-![](https://github.com/salehyarahmadi/AndExAlertDialog/blob/master/andex-alert-dialog.gif)
+![](https://github.com/salehyarahmadi/AndExMapHelper/blob/master/andex-map-helper.gif)
 
 ## Setup
 The simplest way to use this library is to add the library as dependency to your build.
