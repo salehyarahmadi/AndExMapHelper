@@ -83,7 +83,7 @@ Step 3. Add your google map api key to AndroidManifest.xml file
     </RelativeLayout>
 
 ### Java
-    ```java
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -131,7 +131,7 @@ Step 3. Add your google map api key to AndroidManifest.xml file
         // show current location on map with arbitary title, snippet and icon
         AndExMapHelper.showCurrentLocationOnMap(this,"Title", "Snippet", R.drawable.ic_current_location);
     }
-    ```
+    
 
 
 
