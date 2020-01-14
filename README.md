@@ -185,7 +185,7 @@ Step 3. Add your google map api key to AndroidManifest.xml file
 * [Apache Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 ```
-Copyright 2019 AndExAlertDialog
+Copyright 2019 AndExMapHelper
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
