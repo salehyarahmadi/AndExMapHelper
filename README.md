@@ -7,7 +7,7 @@ This library has many features such as:
   - add one or many markers on map
   - manage markers icon with a concept called status. you can define an arbitrary count of status that each status has its own related icon. you can change status of markers which also changes the icon of marker.
   - remove a marker from map
-  - draw circle and polygone on map
+  - draw circle and polygon on map
   - filter markers on map by status and also distance
   - ...
   
